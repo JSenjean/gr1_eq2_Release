@@ -7,7 +7,28 @@
 - Joël Senjean
 
 
-## Backlog
+# Définition des rôles
+
+### Visiteur
+Un visiteur est une personne arrivant sur le site mais n'étant pas encore inscrite ou identifiée.
+
+### Utilisateur
+Ce rôle représente toutes les personnesqui ont un compte actif et qui sont connectés sur le site. Le rôle "existe" en dehors des projets, c'est à dire sur la page d'accueil et dans la navigation générale du site.
+
+### Chef de Projet
+Représente un utilisateur qui a créé un nouveau projet. En tant que créateur et chef, il est celui qui gère l'administration du projet, et a plus de droits que les autres membres. Il a la possibilité de transmettre son rôle à un autre membre (un seul chef peut exister simultanément par projet).
+
+### Membre
+Ce rôle regroupe tous les membres d'un projet n'étant pas chef de ce projet. Ils ont des droits plus limités que le chef et ne peuvent rejoindre le projet qu'avec son accord (invitation ou demande).
+
+### Participant
+Ce rôle regroupe le chef de projet et le membre d'un projet. Sur certains aspects du site, ils ont les mêmes droits.
+
+### Administrateur
+Les administrateurs ont les droits les plus élevés sur le site, ils ont accès à la liste des membres et à certaines de leurs informations (non-confidentielles : donc pas les mots de passe, etc ...). Ils gèrent l'administration du site.
+
+
+# Backlog
 
 
 | ID     | Description                                                                                                                                                                                                 | Effort    | Urgence       | Etat | 
