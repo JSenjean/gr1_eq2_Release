@@ -1,55 +1,22 @@
-# Conduite de Projet
+# Sprint 1
 
-## Groupe 1 Equipe 2
+## Dates
 
-- Guillaume Floret
-- Mathieu San Juan
-- Joël Senjean
+Du Mardi 12 Novembre 2019 au Vendredi 22 Novembre 2019
 
+## Résumé
 
-# Définition des rôles
+Le sprint 2 est centré sur l'implémentation des fonctionnalités de gestion du Backlog, du Sprint et des tâches, ainsi que sur la mise en place des tests unitaires et des tests de validation.
+## Issues
 
-### Visiteur
-Un visiteur est une personne arrivant sur le site mais n'étant pas encore inscrite ou identifiée.
+### IDs
 
-### Utilisateur
-Ce rôle représente toutes les personnesqui ont un compte actif et qui sont connectés sur le site. Le rôle "existe" en dehors des projets, c'est à dire sur la page d'accueil et dans la navigation générale du site.
+Les issues sélectionnées pour ce sprint sont les issues 4 à 10 (incluant celles reportées depuis le sprint 1) et 12 à 21.
 
-### Chef de Projet
-Représente un utilisateur qui a créé un nouveau projet. En tant que créateur et chef, il est celui qui gère l'administration du projet, et a plus de droits que les autres membres. Il a la possibilité de transmettre son rôle à un autre membre (un seul chef peut exister simultanément par projet).
+### Détail
 
-### Membre
-Ce rôle regroupe tous les membres d'un projet n'étant pas chef de ce projet. Ils ont des droits plus limités que le chef et ne peuvent rejoindre le projet qu'avec son accord (invitation ou demande).
-
-### Participant
-Ce rôle regroupe le chef de projet et le membre d'un projet. Sur certains aspects du site, ils ont les mêmes droits.
-
-### Administrateur
-Les administrateurs ont les droits les plus élevés sur le site, ils ont accès à la liste des membres et à certaines de leurs informations (non-confidentielles : donc pas les mots de passe, etc ...). Ils gèrent l'administration du site.
-
-
-# Backlog
 | ID     | Description                                   | Difficulté | Priorité | Sprint |
 |--------|-----------------------------------------------|------------|----------|--------|
-| US1    | **En tant que** visiteur                      | 3          | MEDIUM   | 1      |
-|        | **je peux** m'inscrire sur le site en renseignant :
-|        | - Un nom d'utilisateur
-|        | - Une adresse mail valide 
-|        | - Une confirmation d'adresse mail
-|        | - Un mot de passe
-|        | - Une confirmation de mot de passe 
-|        | - Vrai nom
-|        | - Vrai prenom
-|        | **afin de** créer et rejoindre des projets
-| US2    | **En tant que** visiteur                      | 3          | MEDIUM   | 1      |
-|        | **je peux** utiliser mes identifiants sur la page de connexion puis je clique sur connexion et je renseigne:
-|        | - Mon login dans le champ "Identifiant ou email"
-|        | - Mon mot de passe dans le champ "Mot de passe"
-|        | Puis je clique sur connexion
-|        | afin d'être connecté sur le site
-| US3    | **En tant que** utilisateur ou administrateur | 1          | MEDIUM   | 1      |
-|        | **je peux** me déconnecter en cliquant sur le bouton d'option à côté de mon nom d'utilisateur, puis je clique sur le bouton déconnexion
-|        | **afin de** ne plus être identifié sur le site
 | US4    | **En tant que** utilisateur                   | 3          | HIGH     | 1 & 2  |
 |        | **je peux** créer un projet sur la page projet, en renseignant son nom, sa description, et sa visibilité \(est\-ce qu'il apparaîtra dans la recherche des utilisateurs\)
 |        | **afin de** devenir chef de ce projet 
@@ -71,15 +38,6 @@ Les administrateurs ont les droits les plus élevés sur le site, ils ont accès
 | US10   | **En tant que** chef de projet                | 3          | HIGH     | 1 & 2  |
 |        | **je peux** nommer un nouveau chef de projet depuis la page de gestion du projet en cliquant sur transférer le rôle de chef de projet et choisir dans la liste des membres le nouveau chef
 |        | **afin de** transferer les droits à un autre membre 
-| US11   | **En tant que** participant                   | 3          | HIGH     | 1      |
-|        | **je peux** avoir une vue d'ensemble du projet depuis la page de gestion de projet, ce qui affiche les informations suivantes :
-|        | - la liste des membres du projet
-|        | - les demandes actuelles des utilisateurs pour rejoindre le groupe 
-|        | - les invitations en attente, envoyées par le chef de projet aux utilisateurs
-|        | - vue d'ensemble du sprint courant \(dates, tâches restantes\)
-|        | - récapitulatif des tests \(% executé\)
-|        | - le nom, la description et la visibilité du projet
-|        | afin d'avoir une vue d'ensemble du projet
 | US12   | **En tant que** participant                   | 3          | HIGH     | 2      |
 |        | **je peux** créer une user story sur la page backlog en cliquant sur le bouton, puis lui ajouter un identifiant et remplir les champs de nom et description, ainsi qu'associé un effort et une valeur métier et enfin valider la création\. je peux aussi associer un rôle défini dans la page du backlog comme par exemple "Visiteur" ou "Utilisateur"
 |        | **afin de** ajouter une nouvelle user story
@@ -124,32 +82,3 @@ Les administrateurs ont les droits les plus élevés sur le site, ils ont accès
 | US21   | **En tant que** participant                   | 5          | LOW      |
 |        | **je peux** marquer un test comme fait \(vert\), la date de dernière validation sera alors affichée sur ce test\. Si un commit est effectué sur le dépôt de release \(voir page release\), tous les tests sont marqués comme non validés \(rouge\)
 |        | **afin de** avoir un suivi précis de tous les tests, effectués ou non, et si ils ont été validés depuis la dernière mise à jour ou non
-| US22   | **En tant que** chef de projet                | 3          | LOW      |
-|        | **je peux** ajouter un dépôt git de release dans la page de gestion de version \(ou page de release\)
-|        | **afin de** rendre consultable l'historique des versions de release
-| US23   | **En tant que** participant                   | 1          | LOW      |
-|        | **je peux** consulter la page de gestion de version
-|        | **afin de** voir toutes les releases du projet
-| US24   | **En tant que** participant                   | 3          | LOW      |
-|        | **je peux** ajouter/modifier une section de documentation sur la page dédiée en cliquant sur ajouter/modifier une documentation en renseignant :
-|        | - Un nom
-|        | - Une description
-|        | - Une catégorie
-|        | - \(Optionnel\) Un fichier \.md associé
-|        | La date de dernière modification est affichée pour chaque élément de documentation\. Si la documentation n'a pas changé depuis 1, 2, 3 ou 4 semaines, l'élément dans la liste change de couleur \(vert, bleu, orange et rouge\)\.
-|        | **afin de** indiquer qu'un élément de documentation est fait, et si il est ancien ou non \(et donc potentiellement obsolète\)
-| US25   | **En tant que** participant                   | 3          | LOW      |
-|        | **je peux** ajouter/modifier/supprimer une catégorie de documentation sur la page dédiée en cliquant sur les boutons correspondants
-|        | **afin de** organiser les différentes sections de documentation
-| US26   | **En tant que** participant                   | 2          | LOW      |
-|        | **je peux** cliquer sur une section de documentation pour ouvrir le details ce qui permet de cliquer sur le bouton supprimer
-|        | **afin de** supprimer de la liste les documentation obsolètes
-| US27   | **En tant que** utilisateur                   | 3          | LOW      | 1      |
-|        | **je peux** accéder à ma page de profil, et éditer mes informations personnelles \(pénom, nom, adresse email, mot de passe\), consulter mes invitations à rejoindre des projets, et fermer mon compte sur le site 
-|        | **afin de** gérer ou supprimer mes informations personnelles et mon compte
-| US28   | **En tant que** administrateur                | 3          | LOW      | 1      |
-|        | **je peux** accéder au panneau d'administration pour consulter la liste de tous les membres du site, changer leur rôle \(les passer administrateur\), et les supprimer du site
-|        | **afin de** administrer le site
-| US29   | **En tant que** visiteur ou utilisateur       | 2          | LOW      | 1      |
-|        | **je peux** lire les questions fréquemment posées et leur réponse dans la FAQ
-|        | **afin de** trouver des indications sur la manière d'utiliser le site

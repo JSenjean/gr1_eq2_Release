@@ -2,6 +2,10 @@
 
 ## Release n°1
 
+07/11/2019 + Sprint1.v0.1.0
+Release : https://github.com/JSenjean/gr1_eq2_Release/releases
+(Téléchargements en bas de page)
+
 # User Stories achevées
 
 | ID     | Description                                   | Difficulté | Priorité |
