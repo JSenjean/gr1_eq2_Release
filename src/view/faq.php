@@ -24,7 +24,6 @@
           <div id="collapse00" class="collapse" aria-labelledby="heading00" data-parent="#accordion">
             <div class="card-body row">
             <div class="col-sm">
-
             <form method="POST" action="index.php?action=faq">
               <div class="form-group">
                 <label for="select1">Sélectionner une catégorie</label>
@@ -107,7 +106,8 @@
               echo '<a class="list-group-item list-group-item-action" id="list-searchresults-list" data-toggle="list" href="#searchresults" role="tab" aria-controls="searchresults">Recherche</a>';
             $categories = getCategories();
             foreach ($categories as $category):
-              echo '<a class="list-group-item list-group-item-action" id="list-'.$category['category'].'-list" data-toggle="list" href="#'.$category['category'].'" role="tab" aria-controls="'.$category['category'].'">'.$category['category'].'</a>';
+              $ctg = $category['category'];
+              echo '<a class="list-group-item list-group-item-action" id="list-'.$ctg.'-list" data-toggle="list" href="#'.$ctg.'" role="tab" aria-controls="'.$ctg.'">'.$ctg.'</a>';
             endforeach;
           ?>
         </div>
@@ -118,27 +118,31 @@
           <?php
             if (isset($search)){
               echo '<div class="tab-pane fade show" id="searchresults" role="tabpanel" aria-labelledby="list-searchresults-list">';
-              foreach ($search as $value): ?>
+              foreach ($search as $value): 
+                $id = $value['id'];
+                $q = $value['question'];
+                $a = $value['answaer'];
+              ?>
                 <div class="card">
-                  <div class="card-header" id="heading<?php echo $value['id']?>">
-                    <a class="text-dark" href="#" data-toggle="collapse" data-target="#collapseSearch<?php echo $value['id']?>" aria-expanded="false" aria-controls="collapseSearch<?php echo $value['id']?>">
-                      <?php echo $value['question']; ?>
+                  <div class="card-header" id="heading<?php echo $id?>">
+                    <a class="text-dark" href="#" data-toggle="collapse" data-target="#collapseSearch<?php echo $id?>" aria-expanded="false" aria-controls="collapseSearch<?php echo $id?>">
+                      <?php echo $q; ?>
                     </a>
                   </div>
-                  <div id="collapseSearch<?php echo $value['id']?>" class="collapse" aria-labelledby="headingSearch<?php echo $value['id']?>" data-parent="#accordion">
+                  <div id="collapseSearch<?php echo $id?>" class="collapse" aria-labelledby="headingSearch<?php echo $id?>" data-parent="#accordion">
                     <div class="card-body">
-                      <?php echo(nl2br($value['answer'])); ?>
+                      <?php echo nl2br($a); ?>
                     </div>
                     <?php
-                      $QA_ID = $value['id'];
+                      $QA_ID = $id;
                       if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin')){
                         echo 
                           '<div class="card-footer bg-transparent">
-                            <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#editInfoModalSearch'.$value['id'].'">Modifier</button>
-                            <button type="button" class="btn btn-link p-0 pl-2 text-danger" data-toggle="modal" data-target="#confirmDelModalSearch'.$value['id'].'">Supprimer</button>
+                            <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#editInfoModalSearch'.$id.'">Modifier</button>
+                            <button type="button" class="btn btn-link p-0 pl-2 text-danger" data-toggle="modal" data-target="#confirmDelModalSearch'.$id.'">Supprimer</button>
                           </div>';
                        echo 
-                          '<div class="modal fade" id="editInfoModalSearch'.$value['id'].'" tabindex="-1" role="dialog" aria-hidden="true">
+                          '<div class="modal fade" id="editInfoModalSearch'.$id.'" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -147,7 +151,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <form method="POST" action="index.php?action=editQA&id='.$value['id'].'">
+                                <form method="POST" action="index.php?action=editQA&id='.$id.'">
                                   <div class="modal-body">
                                       
                                     <div class="form-group">
@@ -165,11 +169,11 @@
                                       
                                     <div class="form-group">
                                       <label for="exampleFormControlInput1">Question</label>
-                                      <textarea type="text" class="form-control" name="question" rows="2" required>'.$value['question'].'</textarea>
+                                      <textarea type="text" class="form-control" name="question" rows="2" required>'.$q.'</textarea>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleFormControlTextarea1">Réponse</label>
-                                      <textarea type="text" class="form-control" name="nswer" rows="5" required>'.$value['answer'].'</textarea>
+                                      <textarea type="text" class="form-control" name="nswer" rows="5" required>'.$a.'</textarea>
                                     </div>
                                   </div>
                                   <div class="modal-footer"> 
@@ -181,7 +185,7 @@
                           </div>';
                                       
                         echo 
-                          '<div class="modal fade" id="confirmDelModalSearch'.$value['id'].'" tabindex="-1" role="dialog" aria-hidden="true">
+                          '<div class="modal fade" id="confirmDelModalSearch'.$id.'" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -194,7 +198,7 @@
                                   <p>Cette action est irréversible, continuer ?</p>
                                 </div>
                                 <div class="modal-footer"> 
-                                  <a class="btn btn-danger float-right" href="index.php?action=delQA&id='.$value['id'].'" role="button">Supprimer</a>
+                                  <a class="btn btn-danger float-right" href="index.php?action=delQA&id='.$id.'" role="button">Supprimer</a>
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                                 </div>
                               </div>
@@ -209,32 +213,36 @@
               endforeach;
               echo '</div>';
             }
-
             $categories = getCategories();
             foreach ($categories as $category):
               $faq = getQA($category['category']);
-              echo '<div class="tab-pane fade show" id="'.$category['category'].'" role="tabpanel" aria-labelledby="list-'.$category['category'].'-list">';
-              foreach ($faq as $value): ?>
+              $ctg = $category['category'];
+              echo '<div class="tab-pane fade show" id="'.$ctg.'" role="tabpanel" aria-labelledby="list-'.$ctg.'-list">';
+              foreach ($faq as $value): 
+                $id = $value['id'];
+                $q = $value['question'];
+                $a = $value['answer'];
+              ?>
                 <div class="card">      
-                  <div class="card-header" id="heading<?php echo $value['id']?>">
-                    <a class="text-dark" href="#" data-toggle="collapse" data-target="#collapse<?php echo $value['id']?>" aria-expanded="false" aria-controls="collapse<?php echo $value['id']?>">
-                      <?php echo $value['question']; ?>
+                  <div class="card-header" id="heading<?php $id?>">
+                    <a class="text-dark" href="#" data-toggle="collapse" data-target="#collapse<?php $id?>" aria-expanded="false" aria-controls="collapse<?php $id?>">
+                      <?php echo $q; ?>
                     </a>
                   </div>
-                  <div id="collapse<?php echo $value['id']?>" class="collapse" aria-labelledby="heading<?php echo $value['id']?>" data-parent="#accordion">
+                <div id="collapse<?php $id?>" class="collapse" aria-labelledby="heading<?php $id?>" data-parent="#accordion">
                     <div class="card-body">
-                      <?php echo $value['answer']; ?>
+                      <?php echo $a; ?>
                     </div>
                     <?php
-                      $QA_ID = $value['id'];
+                      $QA_ID = $id;
                       if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin')){
                         echo 
                           '<div class="card-footer bg-transparent">
-                            <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#editInfoModal'.$value['id'].'">Modifier</button>
-                            <button type="button" class="btn btn-link p-0 pl-2 text-danger" data-toggle="modal" data-target="#confirmDelModal'.$value['id'].'">Supprimer</button>
+                            <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#editInfoModal'.$id.'">Modifier</button>
+                            <button type="button" class="btn btn-link p-0 pl-2 text-danger" data-toggle="modal" data-target="#confirmDelModal'.$id.'">Supprimer</button>
                           </div>';
                        echo 
-                          '<div class="modal fade" id="editInfoModal'.$value['id'].'" tabindex="-1" role="dialog" aria-hidden="true">
+                          '<div class="modal fade" id="editInfoModal'.$id.'" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -243,7 +251,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <form method="POST" action="index.php?action=editQA&id='.$value['id'].'">
+                                <form method="POST" action="index.php?action=editQA&id='.$id.'">
                                   <div class="modal-body">
                                       
                                     <div class="form-group">
@@ -252,6 +260,7 @@
                                         $categories = getCategories();
                                         echo '<option selected>'.$value['category'].'</option>';
                                         foreach ($categories as $category):
+                                          $ctg = $category['category'];
                                           if ($category['category'] != $value['category'])
                                             echo '<option>'.$category['category'].'</option>';
                                         endforeach;
@@ -261,11 +270,11 @@
                                       
                                     <div class="form-group">
                                       <label for="exampleFormControlInput1">Question</label>
-                                      <textarea type="text" class="form-control" name="question" rows="2" required>'.$value['question'].'</textarea>
+                                      <textarea type="text" class="form-control" name="question" rows="2" required>'.$q.'</textarea>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleFormControlTextarea1">Réponse</label>
-                                      <textarea type="text" class="form-control" name="answer" rows="5" required>'.$value['answer'].'</textarea>
+                                      <textarea type="text" class="form-control" name="answer" rows="5" required>'.$a.'</textarea>
                                     </div>
                                   </div>
                                   <div class="modal-footer"> 
@@ -277,7 +286,7 @@
                           </div>';
                                       
                         echo 
-                          '<div class="modal fade" id="confirmDelModal'.$value['id'].'" tabindex="-1" role="dialog" aria-hidden="true">
+                          '<div class="modal fade" id="confirmDelModal'.$id.'" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -291,7 +300,7 @@
                                 </div>
                                 <div class="modal-footer"> 
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                  <a class="btn btn-danger float-right" href="index.php?action=delQA&id='.$value['id'].'" role="button">Supprimer</a>
+                                  <a class="btn btn-danger float-right" href="index.php?action=delQA&id='.$id.'" role="button">Supprimer</a>
                                 </div>
                               </div>
                             </div>

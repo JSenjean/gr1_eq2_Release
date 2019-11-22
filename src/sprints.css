@@ -1,0 +1,20 @@
+#table-sprint {
+    padding: 20px;
+}
+  
+#table-sprint .col {
+    border: 1px solid #c9c9c9;
+}
+  
+#table-sprint .col:not(:last-child) {
+    border-right-width: 0;
+}
+  
+#table-sprint .row:not(:last-child) .col {
+    border-bottom-width: 0;
+}
+
+#table-sprint .firstCol {
+    border: 1px solid #c9c9c9;
+    background-color: rgb(202, 202, 209);
+}

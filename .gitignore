@@ -1,1 +1,6 @@
 src/config.ini
+composer/
+phpunit*
+vendor/
+2019*.xml
+2020*.xml

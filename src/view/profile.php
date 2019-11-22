@@ -45,7 +45,7 @@
         <div class="card">
           <div class="card-header">Invitations en attentes</div>
           <div class="card-body">
-            <?php foreach ($userInvitations as $value) : ?>
+            <?php foreach ($userInvitations as $value) : $projectIdInv = $value['project_id'];?>
               <div class="card mt-4 invitationOrRequestCard">
                 <div class="card-header">
                   <h6><?php echo $value['name'] ?></h6>
@@ -53,10 +53,10 @@
                 <div class="card-body">
                   <div class="justify-content-between row">
                     <div class="col-md">
-                      <button class="btn btn-success btn-default btn-block acceptInvitation" id="<?php echo ($value['project_id']); ?>">Accepter</button>
+                      <button class="btn btn-success btn-default btn-block acceptInvitation" id="<?php echo $projectIdInv; ?>">Accepter</button>
                     </div>
                     <div class="col-md">
-                      <button class="btn btn-danger btn-default btn-block cancelRequestOrInvitation" id="<?php echo ($value['project_id']); ?>">Refuser</button>
+                      <button class="btn btn-danger btn-default btn-block cancelRequestOrInvitation" id="<?php echo $projectIdInv; ?>">Refuser</button>
                     </div>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
         <div class="card">
           <div class="card-header">Requête en attentes</div>
           <div class="card-body">
-            <?php foreach ($userRequests as $value) : ?>
+            <?php foreach ($userRequests as $value) : $projectIdReq = $value['project_id'];?>
               <div class="card mt-4 invitationOrRequestCard">
                 <div class="card-body">
                   <div class="justify-content-between row">
@@ -78,7 +78,7 @@
                       <h6><?php echo $value['name'] ?></h6>
                     </div>
                     <div class="col-sm my-auto">
-                      <button class="btn btn-danger float-right py-1 cancelRequestOrInvitation" type="button" id="<?php echo ($value['project_id']); ?>">Annuler la requête</button>
+                      <button class="btn btn-danger float-right py-1 cancelRequestOrInvitation" type="button" id="<?php echo $projectIdReq; ?>">Annuler la requête</button>
                     </div>
                   </div>
                 </div>
@@ -138,12 +138,11 @@
   </body>
 
   </html>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script>
-        $(document).ready(function() {     
+        $(document).ready(function() {
             $(".cancelRequestOrInvitation").click(function() {
                 var clickedButton = $(this);
-                
+
                 $.ajax({
                     type: 'POST',
                     url: 'index.php?action=profile',
@@ -160,10 +159,10 @@
             });
         });
 
-        $(document).ready(function() {     
+        $(document).ready(function() {
             $(".acceptInvitation").click(function() {
                 var clickedButton = $(this);
-                
+
                 $.ajax({
                     type: 'POST',
                     url: 'index.php?action=profile',

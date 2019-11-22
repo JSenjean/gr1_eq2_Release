@@ -22,6 +22,14 @@ if ($isMaster || $isMember){
     $requests = get_all_project_joining_requests($projectId);
     $invitations = get_all_project_invitations($projectId);
     $project = get_project_by_id($projectId);
+
+    // Test progress bar
+    include_once("model/tests.php");
+    $proportion = compute_proportion($projectId);
+    $percPassed = $proportion[0];
+    $percFailed = $proportion[1];
+    $percDeprecated = $proportion[2];
+    $percNeverRun = $proportion[3];
     
     // Edit project
     if (isset($_SESSION['projectToEdit'])){

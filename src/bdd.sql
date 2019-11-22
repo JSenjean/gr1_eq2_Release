@@ -3,17 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Ven 01 Novembre 2019 à 09:47
+-- Généré le : Ven 15 Novembre 2019 à 08:52
 -- Version du serveur: 5.0.75
 -- Version de PHP: 5.2.6-3ubuntu4.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données: `gfloret`
@@ -37,7 +31,6 @@ CREATE TABLE IF NOT EXISTS `doc_section` (
   KEY `project_id` (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -51,8 +44,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
   `answer` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `id_category` (`id_category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -64,8 +56,7 @@ CREATE TABLE IF NOT EXISTS `faq_category` (
   `id` int(11) NOT NULL auto_increment,
   `category` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -80,8 +71,7 @@ CREATE TABLE IF NOT EXISTS `inside_project_role` (
   `description` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -98,7 +88,6 @@ CREATE TABLE IF NOT EXISTS `inside_sprint_us` (
   KEY `user_story_id` (`user_story_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -112,8 +101,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `visibility` tinyint(1) NOT NULL default '1',
   `release_git` varchar(255) collate utf8_unicode_ci default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -129,8 +117,7 @@ CREATE TABLE IF NOT EXISTS `project_invitation` (
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`,`project_id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -146,8 +133,7 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -163,8 +149,7 @@ CREATE TABLE IF NOT EXISTS `sprint` (
   `end` date NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -188,7 +173,6 @@ CREATE TABLE IF NOT EXISTS `task` (
   KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -201,11 +185,10 @@ CREATE TABLE IF NOT EXISTS `test` (
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci NOT NULL,
   `last_run` date NOT NULL,
-  `state` enum('passed','deprecated','failed') collate utf8_unicode_ci NOT NULL,
+  `state` enum('passed','deprecated','failed','never_run') collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
 
 -- --------------------------------------------------------
 
@@ -223,8 +206,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` enum('admin','user') collate utf8_unicode_ci NOT NULL,
   `reg_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -236,16 +218,16 @@ CREATE TABLE IF NOT EXISTS `user_story` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `project_id` int(10) unsigned NOT NULL,
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `priority` int(10) unsigned NOT NULL,
-  `effort` int(10) unsigned NOT NULL,
-  `description` text collate utf8_unicode_ci NOT NULL,
+  `priority` enum('low','medium','high','very high') collate utf8_unicode_ci NOT NULL,
+  `effort` enum('0','1','2','3','5','8','13','21','34') collate utf8_unicode_ci NOT NULL,
+  `i_can` text collate utf8_unicode_ci,
+  `so_that` text collate utf8_unicode_ci,
   `role_id` int(10) unsigned default NULL,
   `done` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`,`role_id`),
   KEY `role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -261,7 +243,6 @@ CREATE TABLE IF NOT EXISTS `us_task` (
   KEY `task_id` (`task_id`,`user_story_id`),
   KEY `user_story_id` (`user_story_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
 
 --
 -- Contraintes pour les tables exportées
@@ -289,22 +270,22 @@ ALTER TABLE `inside_project_role`
 -- Contraintes pour la table `inside_sprint_us`
 --
 ALTER TABLE `inside_sprint_us`
-  ADD CONSTRAINT `inside_sprint_us_ibfk_4` FOREIGN KEY (`user_story_id`) REFERENCES `user_story` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `inside_sprint_us_ibfk_3` FOREIGN KEY (`sprint_id`) REFERENCES `sprint` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `inside_sprint_us_ibfk_3` FOREIGN KEY (`sprint_id`) REFERENCES `sprint` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `inside_sprint_us_ibfk_4` FOREIGN KEY (`user_story_id`) REFERENCES `user_story` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `project_invitation`
 --
 ALTER TABLE `project_invitation`
-  ADD CONSTRAINT `project_invitation_ibfk_4` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `project_invitation_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `project_invitation_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_invitation_ibfk_4` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `project_member`
 --
 ALTER TABLE `project_member`
-  ADD CONSTRAINT `project_member_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `project_member_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `project_member_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_member_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `sprint`
@@ -328,15 +309,12 @@ ALTER TABLE `test`
 -- Contraintes pour la table `user_story`
 --
 ALTER TABLE `user_story`
+  ADD CONSTRAINT `user_story_ibfk_4` FOREIGN KEY (`role_id`) REFERENCES `inside_project_role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `user_story_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `us_task`
 --
 ALTER TABLE `us_task`
-  ADD CONSTRAINT `us_task_ibfk_4` FOREIGN KEY (`user_story_id`) REFERENCES `user_story` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `us_task_ibfk_3` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ADD CONSTRAINT `us_task_ibfk_3` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `us_task_ibfk_4` FOREIGN KEY (`user_story_id`) REFERENCES `user_story` (`id`) ON DELETE CASCADE;

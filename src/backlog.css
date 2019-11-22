@@ -1,0 +1,85 @@
+h1
+{
+	color:#fff;
+	margin:40px 0 60px 0;
+	font-weight:300;
+}
+
+.userstory
+{
+	width:100%;
+	height:auto;
+	border-bottom:5px #323233 solid;
+	background:#fff;
+	text-align:center;
+	border-radius:10px;
+	overflow:hidden;
+	position:relative;
+	transition:0.5s;
+	margin-bottom:28px;
+	
+}
+
+
+.userstory img
+{
+	border-radius:50%;
+	margin-bottom:20px;
+	width: 90px;
+}
+
+.userstory h3
+{
+	font-size:20px;
+	font-weight:700;
+}
+
+.userstory p
+{
+	margin-bottom:0;
+}
+
+.userstory-back
+{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:5px 15px 0 15px;
+	text-align:left;
+	background:#fff;
+	overflow-y: auto;
+	
+	
+}
+
+.userstory-front
+{
+	width:100%;
+	height:auto;
+	position:relative;
+	z-index:10;
+	background:#fff;
+	padding:15px;
+	bottom:0px;
+	transition: all 0.5s ease;
+}
+
+.userstory:hover .userstory-front
+{
+	bottom:-200px;
+	transition: all 0.5s ease;
+}
+
+.userstory-main:hover
+{
+	border-color:#777;
+	transition:0.5s;
+}
+.btn-primary-outline {
+	background-color: transparent;
+	border: none;
+  }
+/*our-team-main*/
+

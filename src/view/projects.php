@@ -24,7 +24,7 @@
                                         <h6 class="text-muted">
                                             <span class="font-weight-bold">
                                                 <?php if ($u['role'] == 'master') { ?>
-                                                    <i class='fas fa-crown' style="color:#F3E90A"></i>
+                                                    <em class='fas fa-crown' style="color:#F3E90A"></em>
                                                 <?php } ?>
                                             </span>
                                         </h6>
@@ -34,23 +34,23 @@
                                         <h6 class="text-muted">
                                             <span class="font-weight-bold">
                                                 <?php if ($u['role'] == 'master') { ?>
-                                                    <a  data-target='#inviteToProjectModal'  data-toggle="modal" class="inviteToProjectModalLink" data-projectid="<?php echo ($u['id']) ?>">
-                                                        <i class='fas fa-plus-square' style="color:blue ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Ajouter des membres"></i>
+                                                    <a  data-target='#inviteToProjectModal'  data-toggle="modal" class="inviteToProjectModalLink" data-projectid="<?php echo $u['id']; ?>">
+                                                        <em class='fas fa-plus-square' style="color:blue ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Ajouter des membres"></em>
                                                     </a>
-                                                    <a data-target='#deleteProjectModal' href='index.php?action=projectDelete&projectId=<?php echo ($u['id']) ?>' data-toggle="modal" class="confirmDeleteProjectModalLink">
-                                                        <i class='fas fa-trash' style="color:red; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Supprimer projet"></i>
+                                                    <a data-target='#deleteProjectModal' href='index.php?action=projectDelete&projectId=<?php echo $u['id']; ?>' data-toggle="modal" class="confirmDeleteProjectModalLink">
+                                                        <em class='fas fa-trash' style="color:red; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Supprimer projet"></em>
                                                     </a>
                                                 <?php } else { ?>
-                                                    <a  href='index.php?action=leaveProject&projectId=<?php echo ($u['id']) ?>'>
-                                                        <i class='fas fa-arrow-alt-circle-left	 ' style="color:red ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Quitter le projet"></i>
+                                                    <a  href='index.php?action=leaveProject&projectId=<?php echo $u['id']; ?>'>
+                                                        <em class='fas fa-arrow-alt-circle-left	 ' style="color:red ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Quitter le projet"></em>
                                                     </a>
                                                 <?php } ?>
                                             </span>
                                         </h6>
                                         <h6>
                                             <span class="font-weight-bold">
-                                                <a href='index.php?action=selectedProject&projectId=<?php echo ($u['id']) ?>'>
-                                                    <i class='fas fa-arrow-alt-circle-right	 ' style="color:green ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Accéder au projet"></i>
+                                                <a href='index.php?action=selectedProject&projectId=<?php echo $u['id'];?>'>
+                                                    <em class='fas fa-arrow-alt-circle-right	 ' style="color:green ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Accéder au projet"></em>
                                                 </a>
                                             </span>
                                         </h6>
@@ -83,24 +83,24 @@
 
                     <div class="list-group" id="projectSearchList">
                         <?php foreach ($otherProjects as $u) {
-                            //var_dump($u);
+                            $name = $u['name'];
                             if ($u['visibility'] == 1) { ?>
                                 <div class="list-group-item flex-column align-items-start" id="oneProject">
                                     <div class="media">
 
-                                        <div class="media-body">
+                                        <div class="media-body" id="<?php echo $name; ?>">
                                             <div class="d-flex justify-content-between">
-                                                <h5 class="mt-0" id="projectName"><?php echo $u['name'] ?></h5>
+                                                <h5 class="mt-0" id="projectName<?php echo $name; ?>"><?php echo $name; ?></h5>
                                                 <h6 class="test-muted">
                                                     <span class="font-weight-bold">Chef du projet : </span>
-                                                    <?php echo ($u['username']); ?>
+                                                    <?php echo $u['username']; ?>
                                                 </h6>
                                             </div>
                                             <br>
                                             <div class="d-flex justify-content-between" id="test">
                                                 <h6 class="text-muted">
                                                     <span class="font-weight-bold" id="buttonJoinSpan">
-                                                        <button role="button" class="btn btn-success mb-4 mr-2 askForInvitationButton" data-target='#JoinProject' href='' data-toggle="modal" id="<?php echo ($u[0]); ?>">
+                                                        <button type="button" role="button" class="btn btn-success mb-4 mr-2 askForInvitationButton" data-target='#JoinProject' href='' data-toggle="modal" id="<?php echo $u[0]; ?>">
                                                             Demander à rejoindre
                                                         </button>
                                                     </span>
@@ -146,7 +146,7 @@
                     data: {
                         projectId: buttonRequest.attr('id'),
                         askForInvitation: 'askForInvitation',
-                        requesterUserId: <?php echo ($id); ?>
+                        requesterUserId: <?php echo $id; ?>
                     },
                     success: function(response) {
                         if (response == 1 || response == 0) {

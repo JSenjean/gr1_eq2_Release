@@ -21,10 +21,10 @@
                             } 
                             if ($isMaster){ ?>
                             <a data-toggle="modal" data-target="#editInfoModal" class="btn">
-                                <i class='fas fa-crown' style="color:#F3E90A"></i>
+                                <em class='fas fa-crown' style="color:#F3E90A"></em>
                             </a>
                             <?php } else { ?>
-                                <i class='fas fa-crown' style="color:#F3E90A"></i>
+                                <em class='fas fa-crown' style="color:#F3E90A"></em>
                             <?php } ?>
                         </div>
                         <?php
@@ -34,7 +34,7 @@
                             if ($isMaster) {
                                 echo '
                                     <a href="index.php?action=selectedProjectDeletedMember&projectId='.$projectId.'&userId='.$m['user_id'].'" class="btn">
-                                        <i class="fas fa-times" style="color:#C12F2F; padding-right:4px;" alt="Delete"></i>
+                                        <em class="fas fa-times" style="color:#C12F2F; padding-right:4px;" alt="Delete"></em>
                                     </a>
                                     ';
                                 }
@@ -53,10 +53,10 @@
                                 echo '
                                 <div>
                                     <a href="index.php?action=selectedProjectAcceptRequest&projectId='.$projectId.'&userId='.$r['user_id'].'" class="btn">
-                                        <i class="fas fa-check" style="color:#20CF2D" alt="Validate"></i>
+                                        <em class="fas fa-check" style="color:#20CF2D" alt="Validate"></em>
                                     </a>
                                     <a href="index.php?action=selectedProjectDeleteInvitationOrRequest&projectId='.$projectId.'&userId='.$r['user_id'].'" class="btn">
-                                        <i class="fas fa-times" style="color:#C12F2F" alt="Deny"></i>
+                                        <em class="fas fa-times" style="color:#C12F2F" alt="Deny"></em>
                                     </a>
                                 </div>
                                 ';
@@ -75,7 +75,7 @@
                             if ($isMaster) {
                                 echo '
                                     <a href="index.php?action=selectedProjectDeleteInvitationOrRequest&projectId='.$projectId.'&userId='.$i['user_id'].'" class="btn">
-                                        <i class="fas fa-times" style="color:#C12F2F" alt="Cancel"></i>
+                                        <em class="fas fa-times" style="color:#C12F2F" alt="Cancel"></em>
                                     </a>
                                     ';
                                 }
@@ -109,8 +109,13 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <h5 class="card-title">Tests</h5>
-                        <p>[Barre de progression]</p>
-                        <a href="#" class="btn btn-primary">Détails</a>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $percFailed ?>%" aria-valuenow="<?php echo $percFailed ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percFailed ?>%</div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $percDeprecated ?>%" aria-valuenow="<?php echo $percDeprecated ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percDeprecated ?>%</div>
+                                <div class="progress-bar bg-secondary" role="progressbar" style="width: <?php echo $percNeverRun ?>%" aria-valuenow="<?php echo $percNeverRun ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percNeverRun ?>%</div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $percPassed ?>%" aria-valuenow="<?php echo $percPassed ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $percPassed ?>%</div>
+                            </div>
+                        <a href="index.php?action=tests&projectId=<?php echo $projectId ?>" class="btn btn-primary">Détails</a>
                     </div>
                 </div>
 
@@ -183,7 +188,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" data-toggle="validator" action="index.php?action=editSelectedProject&projectId=<?php echo ($projectId) ?>">
+        <form method="POST" data-toggle="validator" action="index.php?action=editSelectedProject&projectId=<?php echo $projectId ?>">
           <div class="form-group">
             <label for="InputName">Nom</label>
             <input type="textfield" class="form-control" id="InputName" name="name" value="<?php echo $name?>" required>

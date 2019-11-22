@@ -84,7 +84,11 @@ function editProject ($id) {
     $visibility = isset($_POST['visibility']);
     try{
         $bdd = dbConnect();
-        $stmt = $bdd->prepare("UPDATE project SET name=:name, description=:description, visibility=:visibility WHERE id=:id");
+        $stmt = $bdd->prepare(
+            "UPDATE project 
+            SET name=:name, description=:description, visibility=:visibility 
+            WHERE id=:id"
+        );
         $stmt->execute(array(
             'id' => $id,
             'name' => $name,
@@ -103,9 +107,10 @@ function acceptRequest ($project_id, $user_id, $role) {
         $stmt = $bdd->prepare(
             "INSERT INTO project_member(role, project_id, user_id) 
             SELECT :role, :project_id, :user_id
+                FROM dual
                 WHERE NOT EXISTS(
                     SELECT * FROM project_member
-                    WHERE user_id=:user_id
+                    WHERE user_id=:user_id AND project_id=:project_id
             );
             DELETE FROM project_invitation 
             WHERE user_id=:user_id AND project_id=:project_id
@@ -197,8 +202,10 @@ function deleteInvitationOrRequest($project_id, $user_id) {
     try {
         $bdd = dbConnect();
         $stmt = $bdd->prepare(
-            "DELETE FROM project_invitation WHERE project_id=:project_id AND user_id=:user_id
-        ");
+            "DELETE FROM project_invitation 
+            WHERE project_id=:project_id 
+            AND user_id=:user_id"
+        );
         $stmt->execute(array(
             'project_id' => $project_id,
             'user_id' => $user_id

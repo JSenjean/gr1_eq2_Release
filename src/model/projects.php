@@ -19,6 +19,8 @@ function get_all_project_by_user_id($id)
         echo  "<br>" . $e->getMessage();
     }
 }
+
+
 function get_all_project_without_user_id($id)
 {
     try {
@@ -38,7 +40,16 @@ function get_all_project_without_user_id($id)
 function remove_by_project_id($id)
 {
     try {
+
+
         $bdd = dbConnect();
+        $stmt = $bdd->prepare(
+            "DELETE FROM inside_project_role
+                    WHERE project_id=:projectId"
+        );
+
+        $stmt->execute(array(':projectId' => (int) $id));
+
         $stmt = $bdd->prepare(
             "DELETE FROM project
                     WHERE id=:projectId"

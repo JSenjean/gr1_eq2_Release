@@ -5,15 +5,15 @@
     $s = signup();
 
     if ($s == -2){
-        include_once("view/errors/signup_mail.php");
+        include_once("view/errors/alreadyUsedMail.php");
         include_once("view/index.php");
     }
     else if ($s == -3){
-        include_once("view/errors/signup_username.php"); 
+        include_once("view/errors/alreadyUsedId.php"); 
         include_once("view/index.php");
     }
     else if ($s == -4){
-        include_once("view/errors/password.php");
+        include_once("view/errors/wrongPassword.php");
         include_once("view/index.php");
     }
     else { // No errors
