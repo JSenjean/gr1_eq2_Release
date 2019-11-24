@@ -73,12 +73,12 @@ Les issues sélectionnées pour ce sprint sont les issues 4 à 10 (incluant cell
 | US19   | **En tant que** participant                   | 3          | HIGH     | 2      |
 |        | **je peux** déplacer les tâches d'une colonne à une autre en utilisant les flèches sur chaque tâche
 |        | **afin de** indiquer et mettre à jour le statut des tâches durant le déroulement du sprint
-| US20   | **En tant que** participant                   | 3          | LOW      |
+| US20   | **En tant que** participant                   | 3          | HIGH      |
 |        | **je peux** créer/modifier un test sur la page dédiée en renseignant les informations suivantes
 |        | - Un nom
 |        | - Une description
 |        | **je peux** également supprimer un test en cliquant sur le bouton correspondant d'un test
 |        | **afin de** ajouter a la liste des tests
-| US21   | **En tant que** participant                   | 5          | LOW      |
+| US21   | **En tant que** participant                   | 5          | HIGH      |
 |        | **je peux** marquer un test comme fait \(vert\), la date de dernière validation sera alors affichée sur ce test\. Si un commit est effectué sur le dépôt de release \(voir page release\), tous les tests sont marqués comme non validés \(rouge\)
 |        | **afin de** avoir un suivi précis de tous les tests, effectués ou non, et si ils ont été validés depuis la dernière mise à jour ou non
