@@ -3,15 +3,19 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Ven 15 Novembre 2019 à 08:52
+-- Généré le : Sam 30 Novembre 2019 à 18:02
 -- Version du serveur: 5.0.75
 -- Version de PHP: 5.2.6-3ubuntu4.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Base de données: `gfloret`
+-- Base de données: `cdp`
 --
+
+-- Create DB
+CREATE DATABASE IF NOT EXISTS `cdp` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `cdp`;
 
 -- --------------------------------------------------------
 
@@ -86,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `inside_sprint_us` (
   PRIMARY KEY  (`id`),
   KEY `sprint_id` (`sprint_id`,`user_story_id`),
   KEY `user_story_id` (`user_story_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -102,6 +106,24 @@ CREATE TABLE IF NOT EXISTS `project` (
   `release_git` varchar(255) collate utf8_unicode_ci default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `project_commit`
+--
+
+CREATE TABLE IF NOT EXISTS `project_commit` (
+  `id` int(16) unsigned NOT NULL auto_increment,
+  `project_id` int(10) unsigned NOT NULL,
+  `sha` varchar(40) NOT NULL,
+  `committerName` text NOT NULL,
+  `commitMessage` text NOT NULL,
+  `commitUrl` text NOT NULL,
+  `commitDate` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `project_id` (`project_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -160,18 +182,18 @@ CREATE TABLE IF NOT EXISTS `sprint` (
 CREATE TABLE IF NOT EXISTS `task` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `sprint_id` int(10) unsigned NOT NULL,
-  `member_id` int(10) unsigned NOT NULL,
+  `member_id` int(10) unsigned default NULL,
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `predecessor` text collate utf8_unicode_ci NOT NULL,
+  `predecessor` text collate utf8_unicode_ci,
   `description` text collate utf8_unicode_ci,
   `dod` text collate utf8_unicode_ci,
-  `state` enum('todo','onGoing','done') collate utf8_unicode_ci NOT NULL,
-  `time` enum('0.5','1','1.5','2','2.5','3','3.5','4','4.5','5') collate utf8_unicode_ci NOT NULL,
+  `state` enum('todo','onGoing','done') collate utf8_unicode_ci NOT NULL default 'todo',
+  `time` enum('0.5','1','1.5','2','2.5','3','3.5','4','4.5','5') collate utf8_unicode_ci NOT NULL default '0.5',
   `maquette` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),
   KEY `sprint_id` (`sprint_id`,`member_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -188,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `state` enum('passed','deprecated','failed','never_run') collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -297,7 +319,8 @@ ALTER TABLE `sprint`
 -- Contraintes pour la table `task`
 --
 ALTER TABLE `task`
-  ADD CONSTRAINT `task_ibfk_4` FOREIGN KEY (`sprint_id`) REFERENCES `sprint` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `task_ibfk_4` FOREIGN KEY (`sprint_id`) REFERENCES `sprint` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `task_ibfk_5` FOREIGN KEY (`member_id`) REFERENCES `project_member` (`id`);
 
 --
 -- Contraintes pour la table `test`
@@ -309,8 +332,8 @@ ALTER TABLE `test`
 -- Contraintes pour la table `user_story`
 --
 ALTER TABLE `user_story`
-  ADD CONSTRAINT `user_story_ibfk_4` FOREIGN KEY (`role_id`) REFERENCES `inside_project_role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_story_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `user_story_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_story_ibfk_4` FOREIGN KEY (`role_id`) REFERENCES `inside_project_role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `us_task`
