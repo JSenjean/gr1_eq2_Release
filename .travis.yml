@@ -1,0 +1,21 @@
+language: php
+
+sudo: required
+
+php:
+  - nightly
+
+dist: trusty
+
+services:
+  - mysql
+  
+before_install:
+  - mysql -u root < src/bdd.sql
+
+script:
+  - phpunit --log-junit logTests/$( date '+%Y-%m-%d' )-test.xml tests/backlog/backlogTest.php
+  - phpunit --log-junit logTests/$( date '+%Y-%m-%d' )-test.xml tests/profile/profileTest.php
+  - phpunit --log-junit logTests/$( date '+%Y-%m-%d' )-test.xml tests/projects/projectsTest.php
+  - phpunit --log-junit logTests/$( date '+%Y-%m-%d' )-test.xml tests/selectedProject/selectedProjectTest.php
+  - phpunit --log-junit logTests/$( date '+%Y-%m-%d' )-test.xml tests/sprint/sprintTest.php
