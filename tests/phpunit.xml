@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit colors="true" bootstrap="../vendor/autoload.php" printerClass="LimeDeck\Testing\Printer">
+  <testsuites>
+    <testsuite name="backlog">
+      <file>tests/backlog</file>
+    </testsuite>
+    <testsuite name="sprint">
+      <file>tests/sprint</file>
+    </testsuite>
+    <testsuite name="selectedProject">
+      <file>tests/selectedProject</file>
+    </testsuite>
+    <testsuite name="profile">
+      <file>tests/profile</file>
+    </testsuite>
+    <testsuite name="projects">
+      <file>tests/projects</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
