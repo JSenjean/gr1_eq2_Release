@@ -1,5 +1,6 @@
-src/config.ini
 composer/
 phpunit*
 vendor/
 20*.xml
+doc/doc_code/html/*
+doc/doc_code/latex/*
