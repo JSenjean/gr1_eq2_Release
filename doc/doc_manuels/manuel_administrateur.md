@@ -12,6 +12,8 @@ Depuis la racine, lancer la commande :
 docker-compose up --build
 ```
 
+**Note : Attention, il est possible que Docker mette un certain temps à se lancer, jusqu'à plusieurs minutes. Le site peut être affiché mais la connexion à la base de données ne sera pas active. Recharger la page ne permet pas de vérifier que la connexion est établie, il faut réeffectuer une requête (exemple, aller voir sur la page FAQ depuis la barre de menu, et constater qu'il n'y a plus de messages d'erreurs, pour actualiser, recliquer sur le bouton, recharger la page ne fonctionnera pas)**
+
 
 ### Installation manuelle
 
