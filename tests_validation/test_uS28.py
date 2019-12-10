@@ -27,7 +27,7 @@ class TestUS28(unittest.TestCase):
     except Exception as e:
        pass
   
-  def test_uS6(self):
+  def test_uS28(self):
 
     result = True
 
@@ -44,8 +44,8 @@ class TestUS28(unittest.TestCase):
       self.driver.implicitly_wait(2)
       self.wait_for_element_visible_by_id_selector('loginModal')
       self.driver.find_element(By.ID, "InputLogin2").click()
-      self.driver.find_element(By.ID, "InputLogin2").send_keys("admin1")
-      self.driver.find_element(By.ID, "InputPassword3").send_keys("admin1")
+      self.driver.find_element(By.ID, "InputLogin2").send_keys("admin")
+      self.driver.find_element(By.ID, "InputPassword3").send_keys("admin")
       self.waitAjax(self.driver)
       self.driver.find_element(By.CSS_SELECTOR, ".btn:nth-child(3)").click()
       self.driver.implicitly_wait(2)
