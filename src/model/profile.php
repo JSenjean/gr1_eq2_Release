@@ -1,8 +1,17 @@
 <?php
-
-/**
- * Return all the informations of the current user
+/** profile
+ *  -------
+ *  @file
+ *  @brief Various functions, who have for objectif to give all the necessary 
+ * for the controller profile you will find fonctions for 
+ * project_invitation user essentially CRUD function.
  */
+
+    /**
+     * @brief This function return the information about the given user
+     * @param userName The name of the user that you want the information 
+     * @return an array contening the information about given user return -1 if an exception occurs
+     */
 function getUserProfile($userName)
 {
     try {
@@ -23,9 +32,11 @@ function getUserProfile($userName)
 }
 
 
-/**
- * Return the user's number of project
- */
+    /**
+     * @brief This function Return the number of projects in which a user participates. 
+     * @param userId The id of the user that you want the number of project
+     * @return  the number of project about given user return -1 if an exception occurs
+     */
 function getUserNbParticipation($userId)
 {
     try {
@@ -44,9 +55,12 @@ function getUserNbParticipation($userId)
     }
 }
 
-/**
- *  Function that return either the user's invitations if isRequest's value is 0 or the user's requests if isRequest is 1
- */
+    /**
+     * @brief Returns all invitations or requests for a given user. 
+     * @param isRequest 1 for a request and 0 for an invitation 
+     * @param userId The id of the user that you want the number of project
+     * @return  the PDOStatement contening thenumber of project about given user return -1 if an exception occurs
+     */
 function getUserInvitationsOrRequest($isRequest, $userId)
 {
     try {
@@ -66,7 +80,12 @@ function getUserInvitationsOrRequest($isRequest, $userId)
         echo  "<br>" . $e->getMessage();
     }
 }
-
+    /**
+     * @brief This function allows you to cancel a request by deleting the line in the database. this function is automaticly call when you accept an invitation.
+     * @param projectIdToCancel the project id
+     * @param userId the user id 
+     * @return  1 if succes -1 if an exception occurs
+     */
 function CancelRequest($projectIdToCancel, $userId)
 {
     try {
@@ -88,6 +107,13 @@ function CancelRequest($projectIdToCancel, $userId)
     return 1;
 }
 
+
+/**
+ * @brief This function adds a user who has received an invitation to a project to the project. 
+ * @param projectIdToJoin the project id
+ * @param userId the user id 
+ * @return  1 if succes -1 if an exception occurs
+ */
 function AcceptInvitaion($projectIdToJoin, $userId)
 {
     try {
@@ -112,7 +138,9 @@ function AcceptInvitaion($projectIdToJoin, $userId)
 }
 
 /**
- * Delete the account of the current user
+ * @brief This function delete the user with his username
+ * @param userName the user name of the usert that you want to remove  
+ * @return  1 if succes -1 if an exception occurs
  */
 function deleteAccount($userName)
 {

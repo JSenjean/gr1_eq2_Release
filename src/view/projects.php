@@ -49,7 +49,7 @@
                                         </h6>
                                         <h6>
                                             <span class="font-weight-bold">
-                                                <a href='index.php?action=selectedProject&projectId=<?php echo $u['id'];?>'>
+                                                <a href='index.php?action=selectedProject&projectId=<?php echo $u['id']; ?>'>
                                                     <em class='fas fa-arrow-alt-circle-right	 ' style="color:green ; cursor:pointer" data-toggle="tooltip" data-placement="top" title="Accéder au projet"></em>
                                                 </a>
                                             </span>
@@ -136,7 +136,6 @@
 
         $(document).ready(function() {     
             $(".askForInvitationButton").click(function() {
-                console.log($(this).attr('id'));
                 var buttonRequest = $(this);
                 
                 
@@ -150,9 +149,8 @@
                     },
                     success: function(response) {
                         if (response == 1 || response == 0) {
-                            console.log(response);
-                            alert("la demande est transmise");
-                            buttonRequest.html("invitation envoyer");
+                            alert("La demande est transmise");
+                            buttonRequest.html("Invitation envoyée");
                             buttonRequest.attr("disabled", true);
                         } else {
                             alert("une erreur est survenu");

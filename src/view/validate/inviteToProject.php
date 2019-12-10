@@ -12,7 +12,7 @@
                     <div class="form-group ">
                         <label for="userName"> Nom de l'utilisateur : </label>
                         <input type="text" id="userName" maxlength="50 " name="userName">
-                        <button type="button" class="btn btn-secondary" id="addUser" name="addUser">ajouter</button>
+                        <button type="button" class="btn btn-secondary" id="addUser" name="addUser">Ajouter</button>
                     </div>
                     <div class="form-group" id="userAdding">
 
@@ -58,12 +58,10 @@
             });
         });
         $(document).ajaxStop(function() {
-            //console.log(users);
             var userForAutocomplete = [];
             users.forEach(function(element) {
                 userForAutocomplete.push(element[0]);
             })
-            //console.log(userForAutocomplete);
 
 
             $("#addUser").click(function(e) {
@@ -74,7 +72,6 @@
                     $("#userAdding").append('<span class="bg-success m-1 rounded" id="' + nbUser + '"><span class="text-white m-2 ">' + $("#userName").val() + '<a href="#"><i class="fas fa-times removeUser" style="color:white ;cursor:pointer" id="' + nbUser + '"></i></a></span></span>');
                     nbUser++;
                     usersPick.push(currentName);
-                    //console.log(usersPick);
                     $("#userName").val('');
                     //remove the user chose from the userForAutocomplete
                     userForAutocomplete.splice(nameIndex, 1);
@@ -91,9 +88,7 @@
                 userForAutocomplete.push((userRemove));
                 indexOfUserToRemove = usersPick.indexOf[userRemove];
                 usersPick.splice(indexOfUserToRemove, 1);
-                //console.log(usersPick);
                 $('span[id=' + $(this).attr('id') + ']').remove();
-                //console.log(userForAutocomplete);
             })
             $("#userName").autocomplete({
                 source: userForAutocomplete
@@ -112,8 +107,6 @@
                 },
                 success: function(response) {
                    $('#closeCross').click();
-                   
-                   //alert("les invitation ont était envoyé");
                 },
 
             });

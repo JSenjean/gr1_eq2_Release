@@ -45,7 +45,7 @@
         <div class="card">
           <div class="card-header">Invitations en attentes</div>
           <div class="card-body">
-            <?php foreach ($userInvitations as $value) : $projectIdInv = $value['project_id'];?>
+            <?php foreach ($userInvitations as $value) : $projectIdInv = $value['project_id']; ?>
               <div class="card mt-4 invitationOrRequestCard">
                 <div class="card-header">
                   <h6><?php echo $value['name'] ?></h6>
@@ -70,7 +70,7 @@
         <div class="card">
           <div class="card-header">Requête en attentes</div>
           <div class="card-body">
-            <?php foreach ($userRequests as $value) : $projectIdReq = $value['project_id'];?>
+            <?php foreach ($userRequests as $value) : $projectIdReq = $value['project_id']; ?>
               <div class="card mt-4 invitationOrRequestCard">
                 <div class="card-body">
                   <div class="justify-content-between row">

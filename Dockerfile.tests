@@ -1,0 +1,26 @@
+FROM ubuntu:latest
+
+COPY /tests /tests
+COPY /src /src
+COPY install-phpunit.sh /install-phpunit.sh
+COPY runTests.sh /runTests.sh
+
+COPY /tests/docker/configTest.ini /tests/configTest.ini
+
+RUN apt-get update
+RUN apt-get install -y php-fpm
+RUN apt-get install -y wget
+RUN apt-get install -y git
+RUN apt-get install -y zip
+RUN apt-get install -y unzip
+RUN apt-get install -y php-dom
+RUN apt-get install -y php-mysql
+
+ADD install-phpunit.sh /
+ADD runTests.sh /
+
+RUN chmod +x /install-phpunit.sh
+RUN chmod +x /runTests.sh
+
+RUN [ "sh", "/install-phpunit.sh" ]
+RUN [ "sh", "/runTests.sh" ]

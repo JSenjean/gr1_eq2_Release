@@ -1,12 +1,17 @@
 #table-sprint {
     padding: 20px;
 }
-  
-#table-sprint .col {
+
+#table-sprint .US {
+    border: 1px solid #c9c9c9;
+    border-right-width: 3px;
+}
+
+#table-sprint .colTask {
     border: 1px solid #c9c9c9;
 }
   
-#table-sprint .col:not(:last-child) {
+#table-sprint .colTask:not(:last-child) {
     border-right-width: 0;
 }
   

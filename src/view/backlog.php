@@ -33,7 +33,6 @@
     </div>
   </div>
 </div>
-<h1 class="text-center">Team Design Section with Pure CSS Effect</h1>
 <!-- User storys-->
 <div class="container">
   <div class="row" id="rowUS">
@@ -45,7 +44,7 @@
         <div class="userstory">
 
           <div class="userstory-front">
-            <img src="http://placehold.it/110x110/85D9E8/000?text=<?php echo $userStory['name']; ?>" class="img-fluid" alt=""/>
+            <img src="http://placehold.it/110x110/<?php echo ($userStory["done"] != 1) ? "DC302D" : "85D9E8"; ?>/000?text=<?php echo $userStory['name']; ?>" class="img-fluid" alt=""/>
             <p>effort: <?php echo $userStory['effort']; ?> / Priorité: <?php echo $userStory['priority']; ?> </p>
             <p><?php echo $roleName ?></p>
           </div>

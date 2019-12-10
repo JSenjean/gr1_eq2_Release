@@ -14,6 +14,8 @@ import test_uS27
 import test_uS28
 import test_uS29
 
+import test_clean
+
 import unittest
 import pytest
 import time
@@ -45,6 +47,9 @@ def main(out = sys.stderr, verbosity = 3):
     suite.addTest(unittest.makeSuite(test_uS27.TestUS27))
     suite.addTest(unittest.makeSuite(test_uS28.TestUS28))
     suite.addTest(unittest.makeSuite(test_uS29.TestUS29))
+
+    suite.addTest(unittest.makeSuite(test_clean.TestClean))
+
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
 
 if __name__ == '__main__': 

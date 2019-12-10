@@ -1,5 +1,17 @@
 <?php
+/** selectedProject
+ *  -------
+ *  @file
+ *  @brief Various functions, who have for objectif to give all the necessary 
+ * for selectedProject you will find fonctions for 
+ * project user essentially CRUD function.
+ */
 
+    /**
+     * @brief This function returns the leader of a given project. 
+     * @param id the project id 
+     * @return The PDOStatement contening the project master or -1 if an exception occurs
+     */
 function get_project_master($id){
     try {
         $bdd = dbConnect();
@@ -15,7 +27,11 @@ function get_project_master($id){
         echo "<br>" . $e->getMessage();
     }
 }
-
+    /**
+     * @brief This function returns all the member of the project.
+     * @param id the project id 
+     * @return The PDOStatement contening all the member of the given project or -1 if an exception occurs
+     */
 function get_all_project_members($id) {
     try {
         $bdd = dbConnect();
@@ -32,6 +48,11 @@ function get_all_project_members($id) {
     }
 }
 
+    /**
+     * @brief This function returns all the request for the given project.
+     * @param id the project id 
+     * @return The PDOStatement contening user and project_invitation of the given project or -1 if an exception occurs
+     */
 function get_all_project_joining_requests($id) {
     try {
         $bdd = dbConnect();
@@ -48,6 +69,11 @@ function get_all_project_joining_requests($id) {
     }
 }
 
+    /**
+     * @brief This function returns all the sendend invitation for the given project.
+     * @param id the project id 
+     * @return The PDOStatement contening user and project_invitation of the given project or -1 if an exception occurs
+     */
 function get_all_project_invitations($id) {
     try {
         $bdd = dbConnect();
@@ -64,6 +90,11 @@ function get_all_project_invitations($id) {
     }
 }
 
+    /**
+     * @brief This function returns all the informations for the given project.
+     * @param id the project id 
+     * @return The PDOStatement contening all information of the given project or -1 if an exception occurs
+     */
 function get_project_by_id($id) {
     try {
         $bdd = dbConnect();
@@ -78,11 +109,11 @@ function get_project_by_id($id) {
     }
 }
 
-function editProject ($id) {
+function editProject($id) {
     $name = trim(strip_tags($_POST['name']));
     $description = trim(strip_tags($_POST['description']));
     $visibility = isset($_POST['visibility']);
-    try{
+    try {
         $bdd = dbConnect();
         $stmt = $bdd->prepare(
             "UPDATE project 
@@ -95,13 +126,19 @@ function editProject ($id) {
             'description' => $description,
             'visibility' => $visibility
         ));
-    }
-    catch(PDOException $e){
+    } catch(PDOException $e){
         echo  "<br>" . $e->getMessage();
     }
 }
 
-function acceptRequest ($project_id, $user_id, $role) {
+/**
+ * @brief This function adds a user who has send a request to a project to the project. 
+ * @param project_id the project id
+ * @param user_id the user id 
+ * @param role the role of the user in the project id 
+ * @return  1 if succes -1 if an exception occurs
+ */
+function acceptRequest($project_id, $user_id, $role) {
     try {
         $bdd = dbConnect();
         $stmt = $bdd->prepare(
@@ -126,6 +163,12 @@ function acceptRequest ($project_id, $user_id, $role) {
     }
 }
 
+/**
+ * @brief This function deletes a given user from a given project. 
+ * @param project_id the project id
+ * @param user_id the user id 
+ * @return  1 if succes -1 if an exception occurs
+ */
 function deleteMember($project_id, $user_id) {
     try {
         $bdd = dbConnect();
@@ -141,7 +184,12 @@ function deleteMember($project_id, $user_id) {
         echo "<br>" . $e->getMessage();
     }
 }
-
+/**
+ * @brief This function allows you to know if a given user is the project manager.
+ * @param project_id the project id
+ * @param user_id the user id 
+ * @return  true if is master false if not and -1 if an exception occurs
+ */
 function is_master($id, $project_id) {
     try {
         $bdd = dbConnect();
@@ -157,19 +205,24 @@ function is_master($id, $project_id) {
     } catch (PDOException $e) {
         echo "<br>" . $e->getMessage();
     }
-    if (isset($stmt)){
+    if (isset($stmt)) {
         $result = NULL;
-        foreach($stmt as $s){
+        foreach ($stmt as $s) {
             $result = $s['role'];
         }
-        if ($result == 'master'){
+        if ($result == 'master') {
             return true;
         } else {
             return false;
         }
     }
 }
-
+/**
+ * @brief This function allows you to know if a given user is a project member.
+ * @param project_id the project id
+ * @param user_id the user id 
+ * @return  true if is member false if not and -1 if an exception occurs
+ */
 function is_member($id, $project_id) {
     try {
         $bdd = dbConnect();
@@ -185,12 +238,12 @@ function is_member($id, $project_id) {
     } catch (PDOException $e) {
         echo "<br>" . $e->getMessage();
     }
-    if (isset($stmt)){
+    if (isset($stmt)) {
         $result = NULL;
-        foreach($stmt as $s){
+        foreach ($stmt as $s) {
             $result = $s['role'];
         }
-        if ($result == 'member'){
+        if ($result == 'member') {
             return true;
         } else {
             return false;
@@ -198,6 +251,12 @@ function is_member($id, $project_id) {
     }
 }
 
+/**
+ * @brief Removes the invitation or query for a given project and user from the project_invitation table. 
+ * @param project_id the project id
+ * @param user_id the user id 
+ * @return 1 if succes -1 if an exception occurs
+ */
 function deleteInvitationOrRequest($project_id, $user_id) {
     try {
         $bdd = dbConnect();

@@ -180,7 +180,6 @@
 
                 },
                 success: function(response) {
-                    console.log(response);
                     rolename = (roleName == "choisissez un role" ? "pas de role" : roleName);
 
                     done = (done ? 1:0);
@@ -189,7 +188,7 @@
                         htmlToWrite += '<div class="col-lg-4 usTop" id="US' + response + '">'
                     htmlToWrite += '<div class="userstory">'
                     htmlToWrite += '<div class="userstory-front">'
-                    htmlToWrite += '<img src="http://placehold.it/110x110/85D9E8/000?text=' + usName + '" class="img-fluid" />'
+                    htmlToWrite += '<img src="http://placehold.it/110x110/'+(done ? "85D9E8" : "DC302D")+'/000?text=' + usName + '" class="img-fluid" />'
                     htmlToWrite += '<p>effort: ' + difficulty + ' / Priorité: ' + workValue + ' </p>'
                     htmlToWrite += '<p>' + rolename + '</p>'
                     htmlToWrite += '</div>'

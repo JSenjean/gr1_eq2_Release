@@ -3,7 +3,7 @@
 function dbConnect()
 {
     $config = parse_ini_file('configTest.ini');
-    return $bdd = new PDO("mysql:host=" . $config['servername'] . ";dbname=" . $config['dbname'] . ";charset=utf8", $config['username'], $config['password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    return new PDO("mysql:host=" . $config['servername'] . ";dbname=" . $config['dbname'] . ";charset=utf8", $config['username'], $config['password'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
 function clear_Database()
@@ -87,9 +87,15 @@ function clear_Database()
     $req = $bdd->prepare("ALTER TABLE sprint AUTO_INCREMENT = 1");
     $req->execute();
 
-    //clean
-    $req = $bdd->prepare("DELETE FROM us_task");
+    //clean inside_sprint_task_us
+    $req = $bdd->prepare("DELETE FROM inside_sprint_task_us");
     $req->execute();
-    $req = $bdd->prepare("ALTER TABLE us_task AUTO_INCREMENT = 1");
+    $req = $bdd->prepare("ALTER TABLE inside_sprint_task_us AUTO_INCREMENT = 1");
+    $req->execute();
+
+    //clean project_commit
+    $req = $bdd->prepare("DELETE FROM project_commit");
+    $req->execute();
+    $req = $bdd->prepare("ALTER TABLE project_commit AUTO_INCREMENT = 1");
     $req->execute();
 }

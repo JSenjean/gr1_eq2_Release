@@ -16,7 +16,7 @@
     });
     
     $('#deprecated').change(function() {
-        if($('#displayfailed').prop('checked')) {
+        if($('#displaydeprecated').prop('checked')) {
             $('#adddeprecated').show();
         } else {
             $('#adddeprecated').hide();

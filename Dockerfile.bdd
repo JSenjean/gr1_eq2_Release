@@ -1,0 +1,2 @@
+FROM mysql:8.0.2
+COPY src/bdd.sql docker-entrypoint-initdb.d/bdd.sql

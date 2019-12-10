@@ -1,6 +1,6 @@
 <?php
 
-    if(!isset($_SESSION)){
+    if (!isset($_SESSION)) {
         session_start();
     }
 
@@ -24,14 +24,13 @@
                        
                     ));
                     $rows = $stmt->rowCount();
-                    if ($rows != 0){
+                    if ($rows != 0) {
                         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $_SESSION['username']=$result ["username"];
-                        $_SESSION['id']=$result ["id"];
-                        $_SESSION['role']=$result ["role"];
+                        $_SESSION['username'] = $result ["username"];
+                        $_SESSION['id'] = $result ["id"];
+                        $_SESSION['role'] = $result ["role"];
                     }
-                }
-                catch(PDOException $e) {
+                } catch (PDOException $e) {
                     echo "Error: " . $e->getMessage();
                 }
             }

@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-        <?php endforeach;?>
+        <?php endforeach; ?>
       </tbody>
       </table>
       </div>
@@ -90,7 +90,7 @@
           <td class="text-left"><?php echo $admin['email']?></td>
           <td class="text-left"><?php echo date('d/m/Y', strtotime($admin['reg_date']))?></td>
         </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
       </tbody>
       </table>
       </div>

@@ -1,7 +1,16 @@
 <?php
+/** Mod Panel
+ *  ---------
+ *  @file
+ *  @brief Various functions to enable administrator
+ *  monitoring from the mod panel page. Mainly CRUD functions
+ */
+
 
 /**
- * Return all the users with a specified role from the database
+ * @brief Get all the users in the database from a specified role
+ * @param role The role we want to get all the users from
+ * @return users All the users that have the specified role
  */
 function getAllUsers($role)
 {
@@ -21,8 +30,11 @@ function getAllUsers($role)
 
 
 /**
- * Modify the role of a specified user the newrole
- * Only usable if the one who make the change have a higher rank than the specified user
+ * @brief Change the role of a given user to match the new given role
+ * Only possible in the case of an administrator editing the role of a regular user
+ * @param user The username of the user that will change role
+ * @param newrole The new role that will be given to this user
+ * 
  */
 function changeUserRole($user, $newrole)
 {
@@ -60,8 +72,9 @@ function changeUserRole($user, $newrole)
 
 
 /**
- * Delete the specified user
- * Only usable if the one who make the delete have a higher rank than the specified user
+ * @brief Delete a given user from its username
+ * Only possible in the case of an administrator deleting a regular user
+ * @param user The username of the user that will be deleted
  */
 function deleteUser($user)
 {

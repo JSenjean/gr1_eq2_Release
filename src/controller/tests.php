@@ -7,32 +7,32 @@
 
     if (isset($_POST['manageTest'])) {
         $command = $_POST['manageTest'];
-        if($command == 'add') {
+        if ($command == 'add') {
             echo add_new_test(
                 $_POST["projectId"],
                 $_POST["name"],
                 $_POST["description"],
                 $_POST["state"]
             );
-        } else if($command == 'passAll'){
+        } else if ($command == 'passAll') {
             echo pass_all_tests($_POST["projectId"]);
-        } else if($command == 'edit'){
+        } else if ($command == 'edit') {
             echo edit_test(
                 $_POST["id"],
                 $_POST["name"],
                 $_POST["description"],
                 $_POST["state"]
             );
-        } else if ($command == 'delete'){
+        } else if ($command == 'delete') {
             echo delete_test($_POST["id"], $_POST["state"]);
-        } else if ($command == 'pass'){
+        } else if ($command == 'pass') {
             echo change_state($_POST["id"], 'passed');
-        } else if ($command == 'fail'){
+        } else if ($command == 'fail') {
             echo change_state($_POST["id"], 'failed');
         }
 
     } else if (isset($_POST['divToRefresh'])) { // Refresh one of the divs containing the tests
-        switch ($_POST['divToRefresh']){
+        switch ($_POST['divToRefresh']) {
             case 'failed':
                 $testsFailed = get_all_failed_tests($_POST["projectId"]);
                 include_once("view/tests/failedTests.php");
@@ -53,9 +53,9 @@
                 echo "Erreur, impossible de rafraîchir la div " . $_POST['divToRefresh'];
                 break;
         }
-    } else if(isset($_POST['refreshProgressBar'])) { // Refresh the test progress bar
+    } else if (isset($_POST['refreshProgressBar'])) { // Refresh the test progress bar
         $proportion = compute_proportion($_POST["projectId"]);
-        if ($proportion != -1){
+        if ($proportion != -1) {
             $percPassed = $proportion[0];
             $percFailed = $proportion[1];
             $percDeprecated = $proportion[2];
@@ -74,7 +74,7 @@
 
         include_once("view/projectNav.php");
 
-        $nbNewDeprecatedTests = check_deprecated ($projectId);
+        $nbNewDeprecatedTests = check_deprecated($projectId);
         if ($nbNewDeprecatedTests > 0) {
             include_once("view/errors/newDeprecated.php");
         }
