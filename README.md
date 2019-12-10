@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/JSenjean/gr1_eq2_Dev.svg?branch=master)](https://travis-ci.com/JSenjean/gr1_eq2_Dev) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JSenjean/gr1_eq2_Dev/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JSenjean/gr1_eq2_Dev/)
+[![Build Status](https://travis-ci.com/JSenjean/gr1_eq2_Release.svg?branch=master)](https://travis-ci.com/JSenjean/gr1_eq2_Release) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JSenjean/gr1_eq2_Release/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JSenjean/gr1_eq2_Release/)
 
 # Conduite de Projet
 
